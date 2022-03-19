@@ -10,14 +10,14 @@ NeurIPS 2019
 python setup.py develop
 ```
 # Build guide
-###1. Create conda environment
+##1. Create conda environment
 <code>
 conda create -n approPO 
 
 pip install -r requirements.txt
 </code>
 
-###2. Run experiments
+## 2. Run experiments
 - Config file: args.py
 
 - Paper setting: 
