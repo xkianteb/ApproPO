@@ -20,5 +20,8 @@ pip install -r requirements.txt
 ###2. Run experiments
 - Config file: args.py
 
-- Paper setting:
-- 
+- Paper setting: 
+<code> python approPO.py </code>
+
+- RCPO:
+<code> python rcpo.py </code>
