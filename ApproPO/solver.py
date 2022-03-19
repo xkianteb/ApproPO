@@ -160,11 +160,11 @@ def run(proj_oracle=None, rl_oracle_generator=None, args=None):
                  columns=np.hstack(['ep', 'traj', 'reward', 'prob_failure',\
                                     'obs', 'dist_uni', 'entropy', 'oracle_calls',\
                                     'cache_calls', 'traj_len', 'avg_traj_len', 'samples']))
-
+        root_dir = 'D:/Anhs/SMU/AI/Computation and Optimization/paper/ApproPO'
         if args.diversity:
-            policy_df.to_csv(f'{args.output}/ours_policy_diversity_{args.name}.csv', index=False)
-            shadow_df.to_csv(f'{args.output}/ours_best_diversity_{args.name}.csv', index=False)
+            policy_df.to_csv(f'{root_dir}/{args.output}/ours_policy_diversity_{args.name}.csv', index=False)
+            shadow_df.to_csv(f'{root_dir}/{args.output}/ours_best_diversity_{args.name}.csv', index=False)
         else:
-            policy_df.to_csv(f'{args.output}/ours_policy_{args.name}.csv', index=False)
-            shadow_df.to_csv(f'{args.output}/ours_best_{args.name}.csv', index=False)
+            policy_df.to_csv(f'{root_dir}/{args.output}/ours_policy_{args.name}.csv', index=False)
+            shadow_df.to_csv(f'{root_dir}/{args.output}/ours_best_{args.name}.csv', index=False)
 

@@ -87,9 +87,9 @@ def main():
          columns=np.hstack(['ep', 'traj', 'reward', 'prob_failure',\
                             'obs', 'dist_uni', 'entropy', 'oracle_calls',\
                             'cache_calls', 'traj_len', 'avg_traj_len', 'samples', 'lamnda']))
-
-    df.to_csv(f'{args.output}/rcpo_{args.name}.csv', index=False)
-    shadow_df.to_csv(f'{args.output}/rcpo_{args.name}_avg_{total_num_samples}.csv', index=False)
+    root_dir = 'D:/Anhs/SMU/AI/Computation and Optimization/paper/ApproPO'
+    df.to_csv(f'{root_dir}/{args.output}/rcpo_{args.name}.csv', index=False)
+    shadow_df.to_csv(f'{root_dir}/{args.output}/rcpo_{args.name}_avg_{total_num_samples}.csv', index=False)
 
 if __name__ == '__main__':
     main()

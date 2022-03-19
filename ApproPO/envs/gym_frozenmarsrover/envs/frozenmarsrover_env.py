@@ -170,6 +170,7 @@ class FrozenMarsRoverEnv(DiscreteEnv):
         return risk_zones, goal
 
     def step(self, action):
+        # The environment is stochastic: with probability δ = 0:05 the agent’s action is perturbed to a random action
         if random.uniform(0,1) < 0.05 and self.reward_type == 'rcpo':
             action = random.randint(0,3)
 

@@ -16,22 +16,22 @@ def appropo_args(parser):
     parser.add_argument("--num_epochs", type=int, default=3000)
     parser.add_argument("--cache_size", type=int, default=5)
     parser.add_argument('--output', type=str, default='results')
-    parser.add_argument('--print', default=False, action='store_true')
+    parser.add_argument('--print', default=True, action='store_true')
     parser.add_argument('--diversity', default=False, action='store_true')
     parser.add_argument('--threshold', type=float, default=0.12)
     parser.add_argument('--check_traj', type=int, default=5)
     parser.add_argument('--device', type=str, default='cpu')
     parser.add_argument('--mx_size', type=int, default=20)
     parser.add_argument('--name', type=str, default='tmp')
-    parser.add_argument('--init_variable', default='None', choices=['constraint', 'reward', 'both','None'])
+    parser.add_argument('--init_variable', default='constraint', choices=['constraint', 'reward', 'both','None']) # use safety constraint same with rcpo theta[0]= 0.6
 
     # RL Oracle
-    parser.add_argument("--rl_iter", type=int, default=300)
+    parser.add_argument("--rl_iter", type=int, default=300) # step
     parser.add_argument("--rl_traj", type=int, default=20)
     parser.add_argument("--rl_lr", type=float, default=1e-2)
     parser.add_argument("--entropy_coef", type=float, default=.001)
     parser.add_argument("--value_coef", type=float, default=1.0)
-    parser.add_argument('--gamma', type=float, default=0.99, metavar='G',
+    parser.add_argument('--gamma', type=float, default=0.99, metavar='G', # discount factor
                         help='discount factor (default: 0.99)')
     # Projection Oracle
     parser.add_argument("--proj_lr", type=float, default=1)
