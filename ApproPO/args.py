@@ -23,7 +23,7 @@ def appropo_args(parser):
     parser.add_argument('--device', type=str, default='cpu')
     parser.add_argument('--mx_size', type=int, default=20)
     parser.add_argument('--name', type=str, default='tmp')
-    parser.add_argument('--init_variable', default='constraint', choices=['constraint', 'reward', 'both','None']) # use safety constraint same with rcpo theta[0]= 0.6
+    parser.add_argument('--init_variable', default='both', choices=['constraint', 'reward', 'both','None']) # use safety constraint same with rcpo theta[0]= 0.6
 
     # RL Oracle
     parser.add_argument("--rl_iter", type=int, default=300) # step
