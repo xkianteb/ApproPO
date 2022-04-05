@@ -85,7 +85,7 @@ class RL_Oracle:
         sum_measurements = np.zeros(np.shape(self.theta))
         episode_stats = defaultdict(list)
 
-        for _ in range(n_traj):
+        for _ in range(n_traj): # ramdom in number of trajectory
             obs = self.env.reset()
             done = False
             traj_measurements = np.zeros(self.theta.size)
@@ -93,12 +93,14 @@ class RL_Oracle:
             for i in range(n_iter):
                 action = self.select_action(obs)
                 obs, env_reward, done, info = self.env.step(action)
+
                 constraint = info['constraint']
                 goal = info['goal']
+                # print(f"constraint: {constraint} , goal :{goal}")
                 measurements = np.append(np.array([-float(constraint), env_reward]), (obs==1)*1.0)
 
                 traj_measurements = traj_measurements + measurements
-                reward = np.dot(self.theta, measurements)
+                reward = np.dot(self.theta, measurements) # theta is lambda
                 if cost:
                     reward = -reward
                 self.rewards.append(reward)
@@ -117,5 +119,5 @@ class RL_Oracle:
 
         #print(f'{obs}')
         #print('-----')
-        avg_measurements = sum_measurements / n_traj
+        avg_measurements = sum_measurements / n_traj  # long term measurement
         return (avg_measurements, episode_stats)

@@ -33,7 +33,7 @@ def run(proj_oracle=None, rl_oracle_generator=None, args=None):
     value = float("inf")
     theta = proj_oracle.get_theta()
     new_cache_item = True
-
+    counter= 0
     for episode in range(args.num_epochs):
         min_value = float("inf")
         min_exp_rtn = None
@@ -105,6 +105,7 @@ def run(proj_oracle=None, rl_oracle_generator=None, args=None):
         reset = False
         value = np.dot(theta, np.append(best_exp_rtn, args.mx_size))
         if value < 0 or np.isclose(0,value, atol=args.atol_cache, rtol=args.rtol_cache):
+            counter = 0
             proj_oracle.update(best_exp_rtn.copy()) # Update OLO
             theta = proj_oracle.get_theta()
             print(f"New theta: {theta[:2]} -- value: {value}")
@@ -135,7 +136,7 @@ def run(proj_oracle=None, rl_oracle_generator=None, args=None):
             status += f'  Samples: {stats["num_samples"]}'
         else:
             print(f'Old theta: {rl_oracle.theta}')
-
+            counter+=1
             # Stats
             status = f'Epoch: [{episode}/{args.num_epochs}]\n'
             status += f'   NO UPDATE, <theta,u> is equal: {value}\n'
@@ -146,6 +147,9 @@ def run(proj_oracle=None, rl_oracle_generator=None, args=None):
 
         print(status)
         print("------------------------------------------------")
+        if counter == 1000:
+            print("NO IMPROVEMENT over 1000 epoch. STOP NOW!")
+            break
 
     if args.print:
         now = datetime.now() # current date and time
@@ -162,9 +166,9 @@ def run(proj_oracle=None, rl_oracle_generator=None, args=None):
                                     'cache_calls', 'traj_len', 'avg_traj_len', 'samples']))
         root_dir = 'D:/Anhs/SMU/AI/Computation and Optimization/paper/ApproPO'
         if args.diversity:
-            policy_df.to_csv(f'{root_dir}/{args.output}/ours_policy_diversity_{args.name}.csv', index=False)
-            shadow_df.to_csv(f'{root_dir}/{args.output}/ours_best_diversity_{args.name}.csv', index=False)
+            policy_df.to_csv(f'{root_dir}/{args.output}/ours_policy_{args.name}_{args.prob_failure}_{args.init_variable}_{args.threshold}_diversity.csv', index=False)
+            shadow_df.to_csv(f'{root_dir}/{args.output}/ours_best_{args.name}_{args.prob_failure}_{args.init_variable}_{args.threshold}_diversity.csv', index=False)
         else:
-            policy_df.to_csv(f'{root_dir}/{args.output}/ours_policy_{args.name}.csv', index=False)
-            shadow_df.to_csv(f'{root_dir}/{args.output}/ours_best_{args.name}.csv', index=False)
+            policy_df.to_csv(f'{root_dir}/{args.output}/ours_policy_{args.name}_{args.prob_failure}_{args.init_variable}_{args.threshold}.csv', index=False)
+            shadow_df.to_csv(f'{root_dir}/{args.output}/ours_best_{args.name}_{args.prob_failure}_{args.init_variable}_{args.threshold}.csv', index=False)
 
