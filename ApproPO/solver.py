@@ -147,9 +147,9 @@ def run(proj_oracle=None, rl_oracle_generator=None, args=None):
 
         print(status)
         print("------------------------------------------------")
-        if counter == 1000:
-            print("NO IMPROVEMENT over 1000 epoch. STOP NOW!")
-            break
+        # if counter == 1000:
+        #     print("NO IMPROVEMENT over 1000 epoch. STOP NOW!")
+        #     break
 
     if args.print:
         now = datetime.now() # current date and time
@@ -164,11 +164,11 @@ def run(proj_oracle=None, rl_oracle_generator=None, args=None):
                  columns=np.hstack(['ep', 'traj', 'reward', 'prob_failure',\
                                     'obs', 'dist_uni', 'entropy', 'oracle_calls',\
                                     'cache_calls', 'traj_len', 'avg_traj_len', 'samples']))
-        root_dir = 'D:/Anhs/SMU/AI/Computation and Optimization/paper/ApproPO'
+        root_dir = '/home/anh/ApproPO'
         if args.diversity:
-            policy_df.to_csv(f'{root_dir}/{args.output}/ours_policy_{args.name}_{args.prob_failure}_{args.init_variable}_{args.threshold}_diversity.csv', index=False)
+            policy_df.to_csv(f'{root_dir}/{args.output}/prob_failure_{args.prob_failure}_{args.init_variable}_threshold_{args.threshold}_diversity.csv', index=False)
             shadow_df.to_csv(f'{root_dir}/{args.output}/ours_best_{args.name}_{args.prob_failure}_{args.init_variable}_{args.threshold}_diversity.csv', index=False)
         else:
-            policy_df.to_csv(f'{root_dir}/{args.output}/ours_policy_{args.name}_{args.prob_failure}_{args.init_variable}_{args.threshold}.csv', index=False)
+            policy_df.to_csv(f'{root_dir}/{args.output}/prob_failure_{args.prob_failure}_{args.init_variable}_threshold_{args.threshold}.csv', index=False)
             shadow_df.to_csv(f'{root_dir}/{args.output}/ours_best_{args.name}_{args.prob_failure}_{args.init_variable}_{args.threshold}.csv', index=False)
 
